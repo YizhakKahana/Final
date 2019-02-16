@@ -63,7 +63,6 @@ public class RegisterActivity extends AppCompatActivity {
                         String user_id = firebaseAuth.getCurrentUser().getUid();
                         DatabaseReference current_user = databaseReference.child(user_id);
                         current_user.child("name").setValue(name);
-                        current_user.child("image").setValue("default");
                         progressDialog.dismiss();
 
                         Intent mainIntent = new Intent(RegisterActivity.this,MainActivity.class);

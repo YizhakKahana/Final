@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private  void  register()
+    private void register()
     {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
@@ -72,9 +72,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         checkUserExist();
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
                     }else{
                         Toast.makeText(LoginActivity.this,"User not found.", Toast.LENGTH_SHORT).show();
                     }
@@ -84,9 +81,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.i("login", e.getMessage());
+                    Toast.makeText(LoginActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
+        }
+        else {
+            Toast.makeText(LoginActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();
         }
     }
 
