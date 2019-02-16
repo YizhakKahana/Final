@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         FirebaseRecyclerAdapter<Blog,BlogViewHolder> adapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
-                Blog.class,R.layout.blog_row,BlogViewHolder.class, databaseReference
+                Blog.class, R.layout.blog_row, BlogViewHolder.class, databaseReference
         ) {
             @Override
             protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
