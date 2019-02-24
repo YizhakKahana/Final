@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private Button newAccountButton;
     private FirebaseAuth auth;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
-        // add user id to database
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         emailLayout = (EditText) findViewById(R.id.emailLogin);
         passwordLayout = (EditText) findViewById(R.id.passwordLogin);
@@ -59,7 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void register()
     {
-        // todo
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void checkLogin(){
@@ -71,28 +73,46 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        // todo check user in database
-                    }else{
-                        Toast.makeText(LoginActivity.this,"User not found.", Toast.LENGTH_SHORT).show();
+                        checkIfUserExists();
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this,"User not found.", Toast.LENGTH_SHORT).show(); //todo string from values
                     }
                 }
             })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.i("login", e.getMessage());
-                            Toast.makeText(LoginActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.i("login", e.getMessage());
+                    Toast.makeText(LoginActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
         else {
-            Toast.makeText(LoginActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();//todo string from values
         }
     }
 
+    private void checkIfUserExists(){
+        final String userId = auth.getCurrentUser().getUid();
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(userId)){
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(LoginActivity.this,"Create your account.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }
