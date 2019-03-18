@@ -1,7 +1,11 @@
 package com.example.afinal;
 
 
-public class Blog {
+import android.arch.lifecycle.ViewModel;
+
+import java.io.Serializable;
+
+public class Blog extends ViewModel implements Serializable {
 
     private String title;
     private String description;

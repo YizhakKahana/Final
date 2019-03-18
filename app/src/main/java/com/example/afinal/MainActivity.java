@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -70,15 +75,20 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth.addAuthStateListener(authStateListener);
 
-
-        FirebaseRecyclerAdapter<Blog,BlogViewHolder> adapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
                 Blog.class, R.layout.blog_row, BlogViewHolder.class, databaseReference
         ) {
             @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, Blog model, int position) {
+            protected void populateViewHolder(BlogViewHolder viewHolder, final Blog model, int position) {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDescription());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
+                viewHolder.view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showFragment(model);
+                    }
+                });
             }
         };
 
@@ -106,27 +116,52 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void showFragment(Blog blog) {
+
+        BlogFragment blogFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
+
+        if (blogFragment == null) {
+            Intent intent = new Intent();
+            intent.setClass(this, DetailsActivity.class);
+            intent.putExtra("position", blog);
+            startActivity(intent);
+        }
+        else{
+            blogFragment.setModel(blog);
+        }
+
+    }
+
+
+
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
         View view;
+
+        Blog blog = new Blog();
 
         public BlogViewHolder(View item){
             super(item);
             view = item;
         }
 
+
         public void setTitle(String title){
             TextView postTitle = (TextView) view.findViewById(R.id.postTitle);
             postTitle.setText(title);
+            blog.setTitle(title);
         }
 
         public void setDesc(String desc){
             TextView postDesc = (TextView) view.findViewById(R.id.postDesc);
             postDesc.setText(desc);
+            blog.setDescription(desc);
+
         }
 
         public void setImage(Context ctx, String image){
             ImageView imageView = (ImageView) view.findViewById(R.id.postImage);
             Picasso.with(ctx).load(image).into(imageView);
+            blog.setImage(image);
         }
     }
 }
