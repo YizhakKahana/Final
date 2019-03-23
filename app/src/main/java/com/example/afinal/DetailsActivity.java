@@ -10,8 +10,8 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.blog_fragment);
 
-        BlogFragment detailsFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
+        BlankFragment detailsFragment = (BlankFragment) getSupportFragmentManager().findFragmentById(R.id.blogFrag);
         Blog blog = (Blog) getIntent().getExtras().get("position");
-        detailsFragment.setModel(blog);
+        //detailsFragment.setModel(blog);
     }
 }

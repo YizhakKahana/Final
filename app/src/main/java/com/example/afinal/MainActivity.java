@@ -33,12 +33,12 @@ import com.squareup.picasso.Picasso;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.SelectionListener {
 
-    private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private BlogFragment blogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,41 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Simple Blog");
         setSupportActionBar(toolbar);
-
-        recyclerView = (RecyclerView) findViewById(R.id.blogList);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        firebaseAuth.addAuthStateListener(authStateListener);
-
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Blog, BlogViewHolder>(
-                Blog.class, R.layout.blog_row, BlogViewHolder.class, databaseReference
-        ) {
-            @Override
-            protected void populateViewHolder(BlogViewHolder viewHolder, final Blog model, int position) {
-                viewHolder.setTitle(model.getTitle());
-                viewHolder.setDesc(model.getDescription());
-                viewHolder.setImage(getApplicationContext(), model.getImage());
-                viewHolder.view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showFragment(model);
-                    }
-                });
-            }
-        };
-
-        recyclerView.setAdapter(adapter);
+        blogFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
     }
 
     @Override
@@ -116,22 +91,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showFragment(Blog blog) {
+    @Override
+    public void onItemSeleceted(Blog blog) {
 
-        BlogFragment blogFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
-
-        if (blogFragment == null) {
+        if (blogFragment == null){
             Intent intent = new Intent();
             intent.setClass(this, DetailsActivity.class);
             intent.putExtra("position", blog);
             startActivity(intent);
         }
-        else{
+        else {
             blogFragment.setModel(blog);
         }
-
     }
-
 
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
