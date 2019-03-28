@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frag"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="com.example.afinal.BlogFragment"
     >
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/blogFrag"
-        android:layout="@layout/blog_row"
-        android:name="com.example.afinal.BlankFragment"/>
-    <!--<include layout="@layout/blog_row"/>-->
+    <!--<fragment-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout="@layout/blog_row" />-->
 
+
+    <include layout="@layout/blog_row"/>
 
 </FrameLayout>
 

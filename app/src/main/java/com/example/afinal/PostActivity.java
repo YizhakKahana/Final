@@ -13,11 +13,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -66,8 +71,14 @@ public class PostActivity extends AppCompatActivity {
     private void startPosting(){
         progressDialog.setMessage("Posting to blog...");
 
+        final Blog toPost = new Blog();
         final String title = titleView.getText().toString();
         final String desc  = descriptionView.getText().toString();
+
+        toPost.setTitle(title);
+        toPost.setDescription(desc);
+        toPost.setUserId(FirebaseAuth.getInstance().getUid());
+        toPost.setTimeStamp(0-new Date().getTime());
 
         if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && imageUri != null){
             progressDialog.show();
@@ -81,9 +92,8 @@ public class PostActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             DatabaseReference post = databaseReference.push();
-                            post.child("title").setValue(title);
-                            post.child("description").setValue(desc);
-                            post.child("image").setValue(uri.toString());
+                            toPost.setImage(uri.toString());
+                            post.setValue(toPost);
                             progressDialog.dismiss();
                             startActivity(new Intent(PostActivity.this,MainActivity.class));
                         }

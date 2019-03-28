@@ -53,7 +53,7 @@ public class MainFragment extends Fragment {
         super.onStart();
 
         adapter = new FirebaseRecyclerAdapter<Blog, MainActivity.BlogViewHolder>(
-                Blog.class, R.layout.blog_row, MainActivity.BlogViewHolder.class, databaseReference
+                Blog.class, R.layout.blog_row, MainActivity.BlogViewHolder.class, databaseReference.orderByChild("time")
         ) {
             @Override
             protected void populateViewHolder(MainActivity.BlogViewHolder viewHolder, final Blog model, int position) {
@@ -63,7 +63,7 @@ public class MainFragment extends Fragment {
                 viewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ((SelectionListener)getActivity()).onItemSeleceted(model);
+                        ((SelectionListener)getActivity()).onItemSelected(model);
                     }
                 });
             }
@@ -77,26 +77,7 @@ public class MainFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        super.onListItemClick(l, v, position, id);
-//
-//        ((SelectionListener)getActivity()).onItemSeleceted(adapter.getItem(position));
-//    }
-
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        ((SelectionListener)getActivity()).onItemSeleceted(adapter.getItem(position));
-//    }
-
     public interface SelectionListener{
-        void onItemSeleceted(Blog blog);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        //getListView().setOnItemClickListener(this);
+        void onItemSelected(Blog blog);
     }
 }

@@ -36,8 +36,6 @@
             android:paddingRight="10dp"
             android:paddingBottom="10dp" />
 
-
-
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

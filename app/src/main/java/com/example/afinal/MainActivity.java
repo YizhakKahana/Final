@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     protected void onStart() {
         super.onStart();
 
-        blogFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
+        //blogFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     }
 
     @Override
-    public void onItemSeleceted(Blog blog) {
+    public void onItemSelected(Blog blog) {
 
         if (blogFragment == null){
             Intent intent = new Intent();
@@ -109,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
         View view;
 
-        Blog blog = new Blog();
-
         public BlogViewHolder(View item){
             super(item);
             view = item;
@@ -120,20 +118,17 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         public void setTitle(String title){
             TextView postTitle = (TextView) view.findViewById(R.id.postTitle);
             postTitle.setText(title);
-            blog.setTitle(title);
         }
 
         public void setDesc(String desc){
             TextView postDesc = (TextView) view.findViewById(R.id.postDesc);
             postDesc.setText(desc);
-            blog.setDescription(desc);
 
         }
 
         public void setImage(Context ctx, String image){
             ImageView imageView = (ImageView) view.findViewById(R.id.postImage);
             Picasso.with(ctx).load(image).into(imageView);
-            blog.setImage(image);
         }
     }
 }
