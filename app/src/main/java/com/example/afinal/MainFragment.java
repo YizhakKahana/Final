@@ -21,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class MainFragment extends Fragment {
 
     private Fragment blogFragment;
@@ -53,13 +56,16 @@ public class MainFragment extends Fragment {
         super.onStart();
 
         adapter = new FirebaseRecyclerAdapter<Blog, MainActivity.BlogViewHolder>(
-                Blog.class, R.layout.blog_row, MainActivity.BlogViewHolder.class, databaseReference.orderByChild("time")
+                Blog.class, R.layout.blog_row, MainActivity.BlogViewHolder.class, databaseReference.orderByChild("timeStamp")
         ) {
             @Override
             protected void populateViewHolder(MainActivity.BlogViewHolder viewHolder, final Blog model, int position) {
                 viewHolder.setTitle(model.getTitle());
-                viewHolder.setDesc(model.getDescription());
-                viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+                viewHolder.setDesc("Posted by: " + model.getUserId());
+
+                Date d = new Date(Math.abs(model.getTimeStamp()));
+                viewHolder.setTime(d.toString());
+                //viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
                 viewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -126,9 +126,13 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
 
         }
 
-        public void setImage(Context ctx, String image){
-            ImageView imageView = (ImageView) view.findViewById(R.id.postImage);
-            Picasso.with(ctx).load(image).into(imageView);
+//        public void setImage(Context ctx, String image){
+//            ImageView imageView = (ImageView) view.findViewById(R.id.postImage);
+//            Picasso.with(ctx).load(image).into(imageView);
+//        }
+        public void setTime(String time){
+            TextView postTime = (TextView) view.findViewById(R.id.postTime);
+            postTime.setText(time);
         }
     }
 }

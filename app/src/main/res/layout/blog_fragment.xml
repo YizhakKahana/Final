@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="com.example.afinal.BlogFragment"
+    style="@android:style/Theme.Holo.NoActionBar"
     >
 
     <!--<fragment-->
@@ -12,7 +13,7 @@
         <!--tools:layout="@layout/blog_row" />-->
 
 
-    <include layout="@layout/blog_row"/>
+    <include layout="@layout/blog_details"/>
 
 </FrameLayout>
 

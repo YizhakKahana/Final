@@ -16,8 +16,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         Blog blog = (Blog) getIntent().getExtras().get("position");
 
-        ((TextView)findViewById(R.id.postTitle)).setText(blog.getTitle());
-        ((TextView)findViewById(R.id.postDesc)).setText(blog.getDescription());
-        Picasso.with(getApplicationContext()).load(blog.getImage()).into((ImageView) findViewById(R.id.postImage));    }
-
+        ((TextView)findViewById(R.id.det_title)).setText(blog.getTitle());
+        ((TextView)findViewById(R.id.det_desc)).setText(blog.getDescription());
+        Picasso.with(getApplicationContext()).load(blog.getImage()).into((ImageView) findViewById(R.id.det_img));
+    }
 }

@@ -77,7 +77,7 @@ public class PostActivity extends AppCompatActivity {
 
         toPost.setTitle(title);
         toPost.setDescription(desc);
-        toPost.setUserId(FirebaseAuth.getInstance().getUid());
+        toPost.setUserId(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         toPost.setTimeStamp(0-new Date().getTime());
 
         if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && imageUri != null){
