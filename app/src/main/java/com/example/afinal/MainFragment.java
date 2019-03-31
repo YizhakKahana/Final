@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -62,10 +63,10 @@ public class MainFragment extends Fragment {
             protected void populateViewHolder(MainActivity.BlogViewHolder viewHolder, final Blog model, int position) {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc("Posted by: " + model.getUserId());
-
-                Date d = new Date(Math.abs(model.getTimeStamp()));
-                viewHolder.setTime(d.toString());
+                viewHolder.setDelete(model.getUserId().equals(firebaseAuth.getCurrentUser().getEmail()), getRef(position));
+                viewHolder.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(Math.abs(model.getTimeStamp()))));
                 //viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+
                 viewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private BlogFragment blogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Simple Blog");
+        toolbar.setTitle("Flames");
         setSupportActionBar(toolbar);
     }
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     protected void onStart() {
         super.onStart();
 
-        //blogFragment = (BlogFragment) getSupportFragmentManager().findFragmentById(R.id.frag);
+        firebaseAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
@@ -94,15 +94,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     @Override
     public void onItemSelected(Blog blog) {
 
-        if (blogFragment == null){
-            Intent intent = new Intent();
-            intent.setClass(this, DetailsActivity.class);
-            intent.putExtra("position", blog);
-            startActivity(intent);
-        }
-        else {
-            blogFragment.setModel(blog);
-        }
+        Intent intent = new Intent();
+        intent.setClass(this, DetailsActivity.class);
+        intent.putExtra("position", blog);
+        startActivity(intent);
     }
 
 
@@ -124,6 +119,18 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
             TextView postDesc = (TextView) view.findViewById(R.id.postDesc);
             postDesc.setText(desc);
 
+        }
+
+        public void setDelete(boolean isMine, final DatabaseReference ref){
+            Button delButton = (Button) view.findViewById(R.id.deleteBtn);
+            delButton.setVisibility(isMine ? View.VISIBLE : View.INVISIBLE);
+
+            delButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ref.removeValue();
+                }
+            });
         }
 
 //        public void setImage(Context ctx, String image){
