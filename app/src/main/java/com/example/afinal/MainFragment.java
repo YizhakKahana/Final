@@ -63,7 +63,7 @@ public class MainFragment extends Fragment {
             protected void populateViewHolder(MainActivity.BlogViewHolder viewHolder, final Blog model, int position) {
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc("Posted by: " + model.getUserId());
-                viewHolder.setDelete(model.getUserId().equals(firebaseAuth.getCurrentUser().getEmail()), getRef(position));
+                viewHolder.setDelete(firebaseAuth.getCurrentUser() != null && model.getUserId().equals(firebaseAuth.getCurrentUser().getEmail()), getRef(position));
                 viewHolder.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(Math.abs(model.getTimeStamp()))));
                 //viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
 

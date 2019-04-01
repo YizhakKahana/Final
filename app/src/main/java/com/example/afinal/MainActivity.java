@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null){
-                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
+                    openLogin();
                 }
             }
         };
@@ -63,11 +61,19 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         setSupportActionBar(toolbar);
     }
 
+    private void openLogin() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
         firebaseAuth.addAuthStateListener(authStateListener);
+
+
     }
 
     @Override

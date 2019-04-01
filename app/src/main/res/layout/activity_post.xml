@@ -15,12 +15,13 @@
         android:adjustViewBounds="true"
         android:background="#00ffffff"
         android:scaleType="centerCrop"
-        android:src="@color/browser_actions_bg_grey"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!--android:src="@drawable/add_btn"-->
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@color/fui_bgAnonymous" />
+    <!--android:src="@color/browser_actions_bg_grey"-->
 
     <EditText
         android:id="@+id/e_title"

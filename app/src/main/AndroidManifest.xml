@@ -19,9 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailsActivity"/>
-        <activity android:name=".PostActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".PostActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name=".RegisterActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name=".LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 
 </manifest>
