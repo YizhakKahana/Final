@@ -79,7 +79,6 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-
                 }
             });
         }

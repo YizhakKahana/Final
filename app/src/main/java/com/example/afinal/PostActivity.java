@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +42,7 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        setTitle("New Post");
 
         storageReference  = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
@@ -102,6 +104,15 @@ public class PostActivity extends AppCompatActivity {
                 }
             });
         }
+        else if (imageUri == null){
+            Toast.makeText(PostActivity.this, "Image is mandatory", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(title)){
+            Toast.makeText(PostActivity.this, "Title is mandatory", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(desc)){
+            Toast.makeText(PostActivity.this, "Content is mandatory", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -110,6 +121,8 @@ public class PostActivity extends AppCompatActivity {
 
         if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
             imageUri = data.getData();
+            findViewById(R.id.iconImg).setVisibility(View.INVISIBLE);
+            findViewById(R.id.tapImg).setVisibility(View.INVISIBLE);
             selectView.setImageURI(imageUri);
         }
     }

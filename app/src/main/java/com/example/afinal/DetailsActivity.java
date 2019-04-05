@@ -15,6 +15,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.blog_fragment);//blog_fragment
 
         Blog blog = (Blog) getIntent().getExtras().get("position");
+        setTitle(blog.getTitle());
 
         ((TextView)findViewById(R.id.det_title)).setText(blog.getTitle());
         ((TextView)findViewById(R.id.det_desc)).setText(blog.getDescription());

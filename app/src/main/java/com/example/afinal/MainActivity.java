@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private boolean isFiltered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +74,16 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         super.onStart();
 
         firebaseAuth.addAuthStateListener(authStateListener);
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public boolean getIsFiltered(){
+        return isFiltered;
     }
 
     @Override
@@ -92,6 +96,15 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         }
         if(id == R.id.action_logout){
             firebaseAuth.signOut();
+        }
+
+        if (id == R.id.filer){
+            item.setChecked(!item.isChecked());
+            isFiltered = item.isChecked();
+
+            MainFragment frag = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_frag);
+            frag.onStart();
+
         }
 
         return super.onOptionsItemSelected(item);

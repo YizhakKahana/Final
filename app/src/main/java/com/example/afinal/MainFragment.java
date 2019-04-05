@@ -20,6 +20,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -27,7 +28,6 @@ import java.util.Date;
 
 public class MainFragment extends Fragment {
 
-    private Fragment blogFragment;
     private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
@@ -53,11 +53,27 @@ public class MainFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        this.getFragmentManager().beginTransaction();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
+        Query currRef = databaseReference.orderByChild("timeStamp");
+        try{
+            if(((MainActivity)getActivity()).getIsFiltered()){
+                //currRef = databaseReference.equalTo(firebaseAuth.getCurrentUser().getEmail(), "userId").getRef();
+                currRef = databaseReference.orderByChild("userId").equalTo(firebaseAuth.getCurrentUser().getEmail());
+            }
+        }catch (Exception e){
+        }
+
+
         adapter = new FirebaseRecyclerAdapter<Blog, MainActivity.BlogViewHolder>(
-                Blog.class, R.layout.blog_row, MainActivity.BlogViewHolder.class, databaseReference.orderByChild("timeStamp")
+                Blog.class, R.layout.blog_row, MainActivity.BlogViewHolder.class, currRef
         ) {
             @Override
             protected void populateViewHolder(MainActivity.BlogViewHolder viewHolder, final Blog model, int position) {
