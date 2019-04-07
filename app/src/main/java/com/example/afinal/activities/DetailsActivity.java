@@ -1,10 +1,12 @@
-package com.example.afinal;
+package com.example.afinal.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.afinal.model.Blog;
+import com.example.afinal.R;
 import com.squareup.picasso.Picasso;
 
 public class DetailsActivity extends AppCompatActivity {

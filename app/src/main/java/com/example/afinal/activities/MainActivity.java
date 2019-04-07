@@ -1,41 +1,26 @@
-package com.example.afinal;
+package com.example.afinal.activities;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.example.afinal.model.Blog;
+import com.example.afinal.fragment.MainFragment;
+import com.example.afinal.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Transaction;
-import com.squareup.picasso.Picasso;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.SelectionListener {
 
@@ -61,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Flames");
+        toolbar.setTitle(getString(R.string.hi) +" "+ firebaseAuth.getCurrentUser().getEmail().split("@")[0]);
         setSupportActionBar(toolbar);
     }
 
@@ -122,49 +107,5 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     }
 
 
-    public static class BlogViewHolder extends RecyclerView.ViewHolder{
-        View view;
 
-        public BlogViewHolder(View item){
-            super(item);
-            view = item;
-        }
-
-
-        public void setTitle(String title){
-            TextView postTitle = (TextView) view.findViewById(R.id.postTitle);
-            postTitle.setText(title);
-        }
-
-        public void setDesc(String desc){
-            TextView postDesc = (TextView) view.findViewById(R.id.postDesc);
-            postDesc.setText(desc);
-        }
-
-        public void setDelete(boolean isMine, final DatabaseReference ref){
-            final Button delButton = (Button) view.findViewById(R.id.deleteBtn);
-            delButton.setVisibility(isMine ? View.VISIBLE : View.INVISIBLE);
-            delButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                new AlertDialog.Builder(delButton.getContext())
-                        .setTitle(R.string.warning)
-                        .setMessage(R.string.confirm)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                ref.removeValue();
-                                Toast.makeText(delButton.getContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
-                            }})
-                        .setNegativeButton(android.R.string.no, null).show();
-                }
-            });
-        }
-
-        public void setTime(String time){
-            TextView postTime = (TextView) view.findViewById(R.id.postTime);
-            postTime.setText(time);
-        }
-    }
 }

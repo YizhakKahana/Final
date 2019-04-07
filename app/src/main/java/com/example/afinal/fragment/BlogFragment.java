@@ -1,20 +1,17 @@
-package com.example.afinal;
+package com.example.afinal.fragment;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextClock;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.example.afinal.model.Blog;
+import com.example.afinal.R;
 
 public class BlogFragment extends Fragment {
 

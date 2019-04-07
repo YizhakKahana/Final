@@ -11,22 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"
+        <activity android:name=".activities.DetailsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"/>
-        <activity android:name=".PostActivity"
+        <activity android:name=".activities.PostActivity"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".activities.RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
