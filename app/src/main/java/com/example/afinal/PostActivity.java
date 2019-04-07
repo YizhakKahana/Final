@@ -42,7 +42,7 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-        setTitle("New Post");
+        setTitle(R.string.new_post);
 
         storageReference  = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
@@ -71,7 +71,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void startPosting(){
-        progressDialog.setMessage("Posting to blog...");
+        progressDialog.setMessage(getString(R.string.POSTING));
 
         final Blog toPost = new Blog();
         final String title = titleView.getText().toString();
@@ -105,13 +105,13 @@ public class PostActivity extends AppCompatActivity {
             });
         }
         else if (imageUri == null){
-            Toast.makeText(PostActivity.this, "Image is mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PostActivity.this, getString(R.string.IMAGE_VALID), Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(title)){
-            Toast.makeText(PostActivity.this, "Title is mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PostActivity.this, getString(R.string.TITLE_VALID), Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(desc)){
-            Toast.makeText(PostActivity.this, "Content is mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PostActivity.this, getString(R.string.DESC_VALID), Toast.LENGTH_SHORT).show();
         }
     }
 

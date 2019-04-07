@@ -10,6 +10,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,10 +66,10 @@ public class MainFragment extends Fragment {
         Query currRef = databaseReference.orderByChild("timeStamp");
         try{
             if(((MainActivity)getActivity()).getIsFiltered()){
-                //currRef = databaseReference.equalTo(firebaseAuth.getCurrentUser().getEmail(), "userId").getRef();
                 currRef = databaseReference.orderByChild("userId").equalTo(firebaseAuth.getCurrentUser().getEmail());
             }
         }catch (Exception e){
+            Log.e("filter", e.getMessage());
         }
 
 
@@ -78,10 +79,9 @@ public class MainFragment extends Fragment {
             @Override
             protected void populateViewHolder(MainActivity.BlogViewHolder viewHolder, final Blog model, int position) {
                 viewHolder.setTitle(model.getTitle());
-                viewHolder.setDesc("Posted by: " + model.getUserId());
+                viewHolder.setDesc(getString(R.string.POSTED_BY) + model.getUserId());
                 viewHolder.setDelete(firebaseAuth.getCurrentUser() != null && model.getUserId().equals(firebaseAuth.getCurrentUser().getEmail()), getRef(position));
                 viewHolder.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(Math.abs(model.getTimeStamp()))));
-                //viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
 
                 viewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -97,7 +97,7 @@ public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_main, container, true);
     }
 
     public interface SelectionListener{

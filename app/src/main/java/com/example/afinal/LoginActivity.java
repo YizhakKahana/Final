@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         checkIfUserExists();
                     }
                     else{
-                        Toast.makeText(LoginActivity.this,"User not found.", Toast.LENGTH_SHORT).show(); //todo string from values
+                        Toast.makeText(LoginActivity.this,getString(R.string.NOT_FOUND), Toast.LENGTH_SHORT).show();
                     }
                 }
             })
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(LoginActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();//todo string from values
+            Toast.makeText(LoginActivity.this, getString(R.string.INVALID_INPUT), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(LoginActivity.this,"Create your account.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,getString(R.string.CREATE_ACCOUNT), Toast.LENGTH_SHORT).show();
                 }
             }
 

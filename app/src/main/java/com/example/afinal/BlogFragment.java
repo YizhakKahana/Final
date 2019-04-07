@@ -53,8 +53,6 @@ public class BlogFragment extends Fragment {
 
         title.setText(mViewModel.getTitle());
         desc.setText(mViewModel.getDescription());
-//        ImageView imageView = card.findViewById(R.id.postImage);
-//        Picasso.with(getContext()).load(mViewModel.getImage()).into(imageView);
     }
 
 

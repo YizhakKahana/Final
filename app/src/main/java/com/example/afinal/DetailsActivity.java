@@ -12,7 +12,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.blog_fragment);//blog_fragment
+        setContentView(R.layout.blog_fragment);
 
         Blog blog = (Blog) getIntent().getExtras().get("position");
         setTitle(blog.getTitle());

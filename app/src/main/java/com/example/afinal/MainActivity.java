@@ -1,12 +1,14 @@
 package com.example.afinal;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -137,25 +139,29 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         public void setDesc(String desc){
             TextView postDesc = (TextView) view.findViewById(R.id.postDesc);
             postDesc.setText(desc);
-
         }
 
         public void setDelete(boolean isMine, final DatabaseReference ref){
-            Button delButton = (Button) view.findViewById(R.id.deleteBtn);
+            final Button delButton = (Button) view.findViewById(R.id.deleteBtn);
             delButton.setVisibility(isMine ? View.VISIBLE : View.INVISIBLE);
-
             delButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ref.removeValue();
+
+                new AlertDialog.Builder(delButton.getContext())
+                        .setTitle(R.string.warning)
+                        .setMessage(R.string.confirm)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                ref.removeValue();
+                                Toast.makeText(delButton.getContext(), R.string.deleted, Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
                 }
             });
         }
 
-//        public void setImage(Context ctx, String image){
-//            ImageView imageView = (ImageView) view.findViewById(R.id.postImage);
-//            Picasso.with(ctx).load(image).into(imageView);
-//        }
         public void setTime(String time){
             TextView postTime = (TextView) view.findViewById(R.id.postTime);
             postTime.setText(time);

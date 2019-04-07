@@ -6,12 +6,6 @@
     android:name="com.example.afinal.BlogFragment"
     >
 
-    <!--<fragment-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/blog_row" />-->
-
-
     <include layout="@layout/blog_details"/>
 
 </FrameLayout>

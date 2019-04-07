@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="logout">התנתק</string>
+    <string name="NOT_FOUND">המשתמש לא קיים</string>
+    <string name="INVALID_INPUT">קלט לא תקין</string>
+    <string name="CREATE_ACCOUNT">צור חשבון</string>
+    <string name="POSTING">מפרסם...</string>
+    <string name="IMAGE_VALID">חובה לצרף תמונה</string>
+    <string name="TITLE_VALID">חסרה כותרת</string>
+    <string name="DESC_VALID">תוכן חובה</string>
+    <string name="SINGING_UP">מתחבר...</string>
+    <string name="POSTED_BY">פורסם ע"י: </string>
+    <string name="SLOGEN">The hottest blog is on fire</string>
+    <string name="e_mail_hint">דוא"ל</string>
+    <string name="password_hint">סיסמה</string>
+    <string name="login_button">התחבר</string>
+    <string name="new_account_button">צור חשבון</string>
+    <string name="title_hint">כותרת...</string>
+    <string name="content_hint">תוכן...</string>
+    <string name="submit_button">פרסם</string>
+    <string name="tap_to_add_an_image">גע כדי להוסיף תמונה</string>
+    <string name="your_name_hint">השם שלך</string>
+    <string name="sign_up_button">הרשם</string>
+    <string name="add_post">פרסם חדש</string>
+    <string name="only_my_posts">הצג את שלי</string>
+    <string name="log_out">התנתק</string>
+    <string name="new_post">פרסם חדש</string>
+    <string name="deleted">הפוסט שלך נמחק</string>
+    <string name="warning">אזהרה</string>
+    <string name="confirm">האם אתה בטוח במחיקה?</string>
+</resources>

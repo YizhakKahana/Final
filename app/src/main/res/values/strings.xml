@@ -2,7 +2,31 @@
     <string name="app_name">Flames</string>
     <string name="action_settings">Settings</string>
     <string name="logout">Logout</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="NOT_FOUND">User not found.</string>
+    <string name="INVALID_INPUT">Invalid Input</string>
+    <string name="CREATE_ACCOUNT">Create your account.</string>
+    <string name="POSTING">Posting your blog...</string>
+    <string name="IMAGE_VALID">Image is mandatory</string>
+    <string name="TITLE_VALID">Title is mandatory</string>
+    <string name="DESC_VALID">Content is mandatory</string>
+    <string name="SINGING_UP">Signing up...</string>
+    <string name="POSTED_BY">Posted by:</string>
+    <string name="SLOGEN">The hottest blog is on fire</string>
+    <string name="e_mail_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="new_account_button">New account</string>
+    <string name="title_hint">Title...</string>
+    <string name="content_hint">Content...</string>
+    <string name="submit_button">Submit</string>
+    <string name="tap_to_add_an_image">Tap to add an image</string>
+    <string name="your_name_hint">Your name</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="add_post">Add post</string>
+    <string name="only_my_posts">Only my posts</string>
+    <string name="log_out">Log out</string>
+    <string name="new_post">New Post</string>
+    <string name="deleted">Your post has been deleted.</string>
+    <string name="warning">Warning</string>
+    <string name="confirm">Are you sure you want to delete?</string>
 </resources>

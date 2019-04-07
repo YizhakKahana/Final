@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = passwordLayout.getText().toString().trim();
 
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)){
-            progressDialog.setMessage("Signing up...");// todo take from strings file
+            progressDialog.setMessage(getString(R.string.SINGING_UP));
             progressDialog.show();
 
             firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

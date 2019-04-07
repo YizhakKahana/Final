@@ -32,6 +32,7 @@
             android:text="Title"
             android:textAlignment="gravity"
             android:textColor="@color/yellow"
+            android:textDirection="locale"
             android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
