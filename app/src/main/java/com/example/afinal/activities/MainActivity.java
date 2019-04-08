@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         databaseReference = FirebaseDatabase.getInstance().getReference().child("blogs");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(getString(R.string.hi) +" "+ firebaseAuth.getCurrentUser().getEmail().split("@")[0]);
+        toolbar.setTitle(getString(R.string.hi) + " " + firebaseAuth.getCurrentUser().getEmail().split("@")[0]);
         setSupportActionBar(toolbar);
     }
 
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
 
             MainFragment frag = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_frag);
             frag.onStart();
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -105,7 +105,4 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Sele
         intent.putExtra("position", blog);
         startActivity(intent);
     }
-
-
-
 }

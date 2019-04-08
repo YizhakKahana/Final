@@ -52,12 +52,6 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        this.getFragmentManager().beginTransaction();
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
 
